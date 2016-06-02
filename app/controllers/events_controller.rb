@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @page_title = @event.name
   end
 
   #GET /events/new
@@ -21,7 +22,7 @@ class EventsController < ApplicationController
 
     @event.save
 
-    redirect_to :action => :index #告訴遊覽器 HTTP code: 303
+    redirect_to events_url :action => :index #告訴遊覽器 HTTP code: 303
   end
   #GET /events/edit/ :id
   def edit
@@ -34,14 +35,14 @@ class EventsController < ApplicationController
 
       @event.update( events_params)
 
-      redirect_to :action => :show, :id => @event
+      redirect_to event_url(@event), :action => :show, :id => @event
   end
 
   #GET /events/destroy/:id
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    redirect_to :action => :index
+    redirect_to events_url :action => :index
   end
 
 
