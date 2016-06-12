@@ -1,19 +1,52 @@
-
-
 <h1>Events list<h1>
-<ul>
 
+<p>
+  <%= link_to "Latest events", latest_events_path %>
+</p>
+
+<%= form_tag events_path, :method => :get do %>
+  <%= text_field_tag "keyword" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<%= form_tag bulk_update_events_path do %>
+
+<%= link_to 'Sort by Name', events_path( :order => "name") %>
+<%= link_to 'Sort by Default', events_path %>
+
+<table class="table">
 <% @events.each do |e| %>
-    <li>
+
+    <tr>
+      <td>
+      <%= check_box_tag "ids[]", e.id, false %>
       <%= e.name %>
+      </td>
 
-      <%= link_to "Show", event_path(e) %>
-      <%= link_to "Edit", edit_event_path(e)%>
-      <%= link_to "Delete", event_path(e), :method => :delete, :data => { :confirm => "Are you sure?" }%>
+      <td>
+        <%= e.user.try(:short_name) %>
+      </td>
 
-    </li>
+      <td>
+      <%= link_to "Show", event_path(e), :class =>"btn btn-primary" %>
+      <%= link_to "Dashboard", dashboard_event_path(e), :class =>"btn btn-primary" %>
+      <%= link_to "Attendee List", event_attendees_path(e), :class =>"btn btn-primary"%>
+      <%= link_to " GET XML", event_path(e, :format => :xml), :class =>"btn btn-default" %>
+      <%= link_to " GET JSON", event_path(e, :format => :json), :class =>"btn btn-default" %>
+      <%= link_to 'Edit', edit_event_path(e), :class =>"btn btn-default" %>
+      <%= link_to 'Delete', event_path(e), :method => :delete, :class =>"btn btn-danger", :data => { :confirm => "Are you sure?" } %>
+      </td>
+    </tr>
 <%end%>
+</table>
 
-</ul>
+<%#= button_to "Delete All", bulk_delete_events_path (this is also a form, can't have a form inside a form%>
+<% end %>
+  <%= submit_tag "Delete" %>
+  <%= submit_tag "Publish" %>
 
-<%= link_to 'New Event', new_event_path %>
+
+<%= link_to 'new event', new_event_path %>
+<%= paginate @events %>
+
+<%= link_to "Atom feed", events_path(:format => :atom) %>
