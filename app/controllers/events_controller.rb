@@ -7,6 +7,7 @@ class EventsController < ApplicationController
   #GET /events
   def index
 
+
     if params[:keyword]
       @events = Event.where( [ "name like ?", "%#{params[:keyword]}%" ] )
     else
@@ -74,6 +75,11 @@ class EventsController < ApplicationController
   #POST /events/udpate/:id
   def update
     if @event.update(events_params)
+      if params[:destroy_logo]
+         @event.logo = nil
+         @event.save
+      end
+
       redirect_to :action => :show, :id => @event
       flash[:notice] = "event was successfully updated"
     else
@@ -104,7 +110,7 @@ class EventsController < ApplicationController
 
   private
   def events_params
-    params.require(:event).permit(:name, :description, :category_id, :status, :group_ids => [] )
+    params.require(:event).permit(:name, :description, :category_id, :status, :logo, :group_ids => [] )
   end
 
   def set_event
