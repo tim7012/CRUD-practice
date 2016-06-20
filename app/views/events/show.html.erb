@@ -12,7 +12,9 @@
 <%= simple_format @event.description %>
 
 <% if @event.logo.exists? %>
-  <%= image_tag( @event.logo.url(:thumb) ) %>
+  <%= link_to @event.logo.url, :target => "_blank" do %>
+     <%= image_tag(@event.logo.url(:thumb)) %>
+   <% end %>
 <% end %>
 
 <p><%= link_to 'Back to index', events_path %></p>
