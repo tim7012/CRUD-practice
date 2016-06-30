@@ -17,8 +17,9 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'omniauth-facebook'
 gem 'paperclip'
 gem 'kaminari'
-
 gem 'devise'
+gem 'rest-client'
+gem "rails-i18n"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -43,6 +44,7 @@ gem 'rails_12factor', group: :production
 
 group :development, :test do
 
+  gem "rspec-rails"
   gem 'faker'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'

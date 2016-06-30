@@ -24,7 +24,10 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @events.to_xml }
-      format.json { render :json => @events.to_json }
+      format.json { arr = @topics.map { |t|
+           { :id => t.id, :title => t.title }
+         }
+         render :json => { :data => arr } }
       format.atom { @feed_title = "My event list" } # index.atom.builder
     end
   end

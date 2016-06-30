@@ -23,13 +23,16 @@ Rails.application.routes.draw do
   get"/welcome/say_hello" => "welcome#say"
 
   get "welcome" => "welcome#index"
-
+  get "/station" => "stations#station"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root :to => 'events#index'
 
+  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+  resources :events
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
