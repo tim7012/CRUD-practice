@@ -20,7 +20,7 @@ namespace :dev do
   end
 
   task :station => :environment do
-    url = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=6556e1e8-c908-42d5-b984-b3f7337b139b"
+    url = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=ddb80380-f1b3-4f8e-8016-7ed9cba571d5"
     json_string = RestClient.get(url)
     data = JSON.parse( json_string )
 

@@ -8,4 +8,8 @@ class WelcomeController < ApplicationController
   def say
 
   end
+
+  def station
+    @stations = Station.all
+  end
 end

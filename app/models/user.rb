@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
 
   has_many :events
 
+  before_create :generate_authentication_token
+
+  def generate_authentication_token
+     self.authentication_token = Devise.friendly_token
+  end
+
   def short_name
     self.email.split("@").first
   end
