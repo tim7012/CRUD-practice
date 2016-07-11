@@ -10,6 +10,9 @@ class WelcomeController < ApplicationController
   end
 
   def station
-    @stations = Station.all
+
+     @stations = Station.all
+
   end
+
 end

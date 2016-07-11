@@ -26,11 +26,11 @@ namespace :dev do
 
     data["result"]["results"].each do |u|
 
-      existing = Station.find_by_raw_id( u["_id"] )
+      existing = Station.find_by_station_id( u["_id"] )
          if existing
            # update
          else
-           Station.create( :raw_id => u["_id"], :name => u["sna"])
+           Station.create( :station_id => u["_id"], :name => u["sna"])
            puts "create #{u["sna"]}"
          end
       end

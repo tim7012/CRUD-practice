@@ -20,6 +20,7 @@ gem 'kaminari'
 gem 'devise'
 gem 'rest-client'
 gem "rails-i18n"
+gem 'sidekiq'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -23,7 +24,7 @@ Rails.application.routes.draw do
   get"/welcome/say_hello" => "welcome#say"
 
   get "welcome" => "welcome#index"
-  get "/station" => "stations#station"
+  get "/station" => "welcome#station"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
